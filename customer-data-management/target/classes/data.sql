@@ -1,1 +1,1 @@
-insert into subscriber values('132454','23','234','236546',23434,'PREPAID');
+INSERT INTO SUBSCRIBER VALUES ('1234','123332','234','23',7878,'PREPAID');

@@ -3,6 +3,8 @@ package com.telecom.customerdatamanagement.Customer;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class SubscriberResource {
@@ -22,9 +25,9 @@ public class SubscriberResource {
 	
 	@SuppressWarnings("unused")
 	@PostMapping("/Subscriber")
-	public void CreateSubscriber(Subscriber subscriber) throws SubscriberAlreadyExistsAuthenticationError{
-		if(subscriberRepo.existsById(subscriber.getIMSI()))
-			throw new SubscriberAlreadyExistsAuthenticationError("Subscriber with same IMSI "+subscriber.getIMSI() + " exists");
+	public void CreateSubscriber(@Valid @RequestBody Subscriber subscriber){
+//		if(subscriberRepo.existsById(subscriber.getIMSI()))
+//			throw new SubscriberAlreadyExistsAuthenticationError("Subscriber with same IMSI "+subscriber.getIMSI() + " exists");
 		
 			Subscriber new_subscriber = subscriberRepo.save(subscriber); 
 			return;

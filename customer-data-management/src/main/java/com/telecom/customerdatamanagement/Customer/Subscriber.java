@@ -1,36 +1,43 @@
 package com.telecom.customerdatamanagement.Customer;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-//import javax.persistence.Table;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Table(name="Subscriber")
 @Entity
 public class Subscriber {
 	
 	@Size(max=16,message = "Subscriber number should not exceed 16 digits")
-	//@Column(name="Subscriber-number")
+	@Column(name="SubscriberNumber")
 	private String Number;
 	
 	@Id
 	@Size(max=32,message="IMSI number should not exceed 32 digits")
-	//@Column(name="imsi-number")
+	@Column(name="IMSInumber")
 	private String IMSI;
 	
-	//@Column(name="plan-id")
+	@Column(name="PlanId")
 	private String PlanId;
 	
-	//@Column(name="region-code")
+	@Column(name="RegionCode")
 	private int RegionCode;
 	
-	//@Column(name="plan-type")
+	@Column(name="PlanType")
 	private int PlanType;
 	
-	//@Column(name="subscriber-type")
-	private  String Type;
+	@Column(name="SubscriberType")
+	private  String subscriberType;
 	
 	public Subscriber() {};
-	public Subscriber(String iMSI, String number, String planId, String regionCode, int planType, int type) 
+	@JsonCreator
+	public Subscriber(@JsonProperty("iMSI") String iMSI,@JsonProperty("number") String number,@JsonProperty("planId") String planId
+			, @JsonProperty("regionCode") String regionCode, @JsonProperty("planType") int planType, @JsonProperty("type") int type) 
 	{
 		super();
 		Number = number;
@@ -41,8 +48,8 @@ public class Subscriber {
 		
 		switch(type)
 		{
-			case 1:	{ Type = "PREPAID"; break;}
-			case 2 :{ Type = "POSTPAID";break;}
+			case 1:	{ subscriberType = "PREPAID"; break;}
+			case 2 :{ subscriberType = "POSTPAID";break;}
 			default: {System.out.println("Error"); break;}
 		}
 	}
@@ -50,11 +57,6 @@ public class Subscriber {
 	public void setNumber(String number) {
 		Number = number;
 	}
-
-	public void setIMSI(String iMSI) {
-		IMSI = iMSI;
-	}
-
 	public void setPlanId(String planId) {
 		PlanId = planId;
 	}
@@ -68,7 +70,7 @@ public class Subscriber {
 	}
 
 	public void setType(String type) {
-		Type = type;
+		subscriberType = type;
 	}
 
 	public String getNumber() {
@@ -92,13 +94,13 @@ public class Subscriber {
 	}
 
 	public String getType() {
-		return Type;
+		return subscriberType;
 	}
 
 	@Override
 	public String toString() {
 		return "Subscriber [Number=" + Number + ", IMSI=" + IMSI + ", PlanId=" + PlanId + ", RegionCode=" + RegionCode
-				+ ", PlanType=" + PlanType + ", Type=" + Type + "]";
+				+ ", PlanType=" + PlanType + ", Type=" + subscriberType + "]";
 	}
 	
 }
