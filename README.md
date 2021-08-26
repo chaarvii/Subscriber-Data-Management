@@ -1,4 +1,4 @@
-# REST API for maintaing data of Telecom Subscribers 
+# REST API for Telecom Subscriber Data Management 
 
 Tinkering around the concepts of REST APIs. 
 Used Spring Boot to develop a simple RESTful API that can perform functions like GET, PUT and POST. 
